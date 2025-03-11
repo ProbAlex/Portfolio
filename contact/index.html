@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alexander Dial - Portfolio | Contact</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#10b981',
+                        accent: '#8b5cf6',
+                        dark: '#1f2937',
+                        light: '#f3f4f6',
+                    },
+                    boxShadow: {
+                        'glow-red': '0 0 15px 5px rgba(239, 68, 68, 0.7)',
+                        'sparkle-blue': '0 0 10px 2px rgba(59, 130, 246, 0.7), 0 0 15px 5px rgba(96, 165, 250, 0.4)',
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-light text-dark min-h-screen flex flex-col">
+    <!-- Navigation Bar -->
+    <nav class="sticky top-0 bg-white shadow-md z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="text-2xl">
+                <a href="../index.html"><span>😎</span></a> <!-- Sunglasses emoji with link to landing page -->
+            </div>
+            <ul class="flex space-x-6">
+                <li><a href="/home" class="font-medium hover:text-primary transition-colors">Home</a></li>
+                <li><a href="/skills" class="font-medium hover:text-primary transition-colors">Skills</a></li>
+                <li><a href="/career" class="font-medium hover:text-primary transition-colors">Career</a></li>
+                <li><a href="/projects" class="font-medium hover:text-primary transition-colors">Projects</a></li>
+                <li><a href="/contact" class="font-medium border-b-2 border-primary">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Contact Section - Empty Body Placeholder -->
+    <section class="flex-grow py-20 bg-light">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center">Get In Touch</h2>
+            <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+                <p class="text-lg text-center text-gray-500">
+                    Contact form coming soon...
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-white py-6">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 Alexander Dial. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>

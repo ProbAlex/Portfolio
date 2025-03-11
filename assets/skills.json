@@ -1,0 +1,154 @@
+{
+    "Frontend": [
+      {
+        "box_title": "HTML",
+        "box_image": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
+        "proficiency": 9.5,
+        "frameworks": [],
+        "outline_color": "#E34F26"
+      },
+      {
+        "box_title": "CSS 3",
+        "box_image": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
+        "proficiency": 9,
+        "frameworks": [
+          {
+            "title": "Tailwind CSS",
+            "image": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg",
+            "confidence": 6
+          }
+        ],
+        "outline_color": "#1572B6"
+      },
+      {
+        "box_title": "JavaScript",
+        "box_image": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+        "proficiency": 7.5,
+        "frameworks": [
+          {
+            "title": "Next.js",
+            "image": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+            "confidence": 5
+          }
+        ],
+        "outline_color": "#F7DF1E"
+      },
+      {
+        "box_title": "TypeScript",
+        "box_image": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+        "proficiency": 7,
+        "frameworks": [
+          {
+            "title": "Next.js",
+            "image": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+            "confidence": 5
+          }
+        ],
+        "outline_color": "#3178C6"
+      }
+    ],
+    "Backend": [
+      {
+        "box_title": "Python",
+        "box_image": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+        "proficiency": 9.8,
+        "frameworks": [
+          {
+            "title": "Flask",
+            "image": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg",
+            "confidence": 6
+          },
+          {
+            "title": "FastAPI",
+            "image": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg",
+            "confidence": 7
+          }
+        ],
+        "outline_color": "#3776AB"
+      },
+      {
+        "box_title": "Java",
+        "box_image": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
+        "proficiency": 9,
+        "frameworks": [],
+        "outline_color": "#007396"
+      },
+      {
+        "box_title": "Kotlin",
+        "box_image": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg",
+        "proficiency": 4,
+        "frameworks": [],
+        "outline_color": "#7F52FF"
+      },
+      {
+        "box_title": "JavaScript",
+        "box_image": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+        "proficiency": 7.5,
+        "frameworks": [
+          {
+            "title": "Node.js",
+            "image": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+            "confidence": 8.5
+          }
+        ],
+        "outline_color": "#F7DF1E"
+      }
+    ],
+    "Tools": [
+      {
+        "box_title": "Git",
+        "box_image": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
+        "proficiency": 7,
+        "frameworks": [],
+        "outline_color": "#F05032"
+      },
+      {
+        "box_title": "Google Cloud",
+        "box_image": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg",
+        "proficiency": 5,
+        "frameworks": [],
+        "outline_color": "#4285F4"
+      },
+      {
+        "box_title": "Cloudflare",
+        "box_image": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cloudflare/cloudflare-original.svg",
+        "proficiency": 4,
+        "frameworks": [],
+        "outline_color": "#F38020"
+      }
+    ],
+    "Systems": [
+      {
+        "box_title": "Windows",
+        "box_image": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg",
+        "proficiency": 9.9,
+        "frameworks": [],
+        "outline_color": "#0078D6"
+      },
+      {
+        "box_title": "MacOS",
+        "box_image": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg",
+        "proficiency": 7,
+        "frameworks": [],
+        "outline_color": "#000000"
+      },
+      {
+        "box_title": "Linux",
+        "box_image": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg",
+        "proficiency": 6,
+        "frameworks": [
+          {
+            "title": "Ubuntu",
+            "image": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ubuntu/ubuntu-plain.svg",
+            "confidence": 8
+          },
+          {
+            "title": "Debian",
+            "image": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/debian/debian-original.svg",
+            "confidence": 8
+          }
+        ],
+        "outline_color": "#FCC624"
+      }
+    ]
+  }  
