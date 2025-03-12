@@ -23,8 +23,9 @@ document.addEventListener('DOMContentLoaded', async function() {
     console.log('Projects page loaded, attempting to fetch data...');
     
     try {
-        // Use a simple relative path that should work in most deployment scenarios
-        const path = '../assets/projects.json';
+        // Use a path that works with both HTTP and HTTPS
+        // First try a relative path
+        let path = '../assets/projects.json';
         console.log(`Fetching projects data from ${path}`);
         
         // Add a timeout to the fetch request
@@ -236,7 +237,11 @@ function setQuestionMarks(card) {
 }
 
 async function fetchGitHubData() {
+    // Add a fallback mechanism for GitHub API requests
+    console.log('Starting GitHub data fetch...');
+    
     const cards = document.querySelectorAll('.project-card[data-repo]');
+    console.log(`Found ${cards.length} project cards with GitHub repos`);
     
     for (const card of cards) {
         const repoUrl = card.dataset.repo;
@@ -248,11 +253,13 @@ async function fetchGitHubData() {
         
         const owner = match[1];
         const repo = match[2];
+        console.log(`Processing GitHub repo: ${owner}/${repo}`);
         
         try {
             // Fetch repo data with timeout
             let repoData = null;
             try {
+                // Ensure HTTPS for GitHub API requests
                 const repoResponse = await fetch(`https://api.github.com/repos/${owner}/${repo}`);
                 if (repoResponse.ok) {
                     repoData = await repoResponse.json();
@@ -287,6 +294,7 @@ async function fetchGitHubData() {
             
             // Fetch languages
             try {
+                // Ensure HTTPS for GitHub API requests
                 const languagesResponse = await fetch(`https://api.github.com/repos/${owner}/${repo}/languages`);
                 if (languagesResponse.ok) {
                     const languagesData = await languagesResponse.json();
@@ -355,6 +363,7 @@ async function fetchGitHubData() {
             // Fetch releases if needed
             if (card.querySelector('.btn-download')) {
                 try {
+                    // Ensure HTTPS for GitHub API requests
                     const releasesResponse = await fetch(`https://api.github.com/repos/${owner}/${repo}/releases/latest`);
                     if (releasesResponse.ok) {
                         const releaseData = await releasesResponse.json();
