@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', async function() {
     try {
         // Fetch projects data
-        const response = await fetch('../assets/projects.json');
+        const response = await fetch('/assets/projects.json');
         if (!response.ok) {
             throw new Error('Failed to load projects data');
         }
@@ -199,6 +199,21 @@ function createProjectCard(project) {
     return card;
 }
 
+// Helper function to set question marks for failed GitHub data requests
+function setQuestionMarks(card) {
+    // Update stars count
+    const starsElement = card.querySelector('.stars-count span');
+    if (starsElement) {
+        starsElement.textContent = '?';
+    }
+    
+    // Update forks count
+    const forksElement = card.querySelector('.forks-count span');
+    if (forksElement) {
+        forksElement.textContent = '?';
+    }
+}
+
 async function fetchGitHubData() {
     const cards = document.querySelectorAll('.project-card[data-repo]');
     
@@ -214,101 +229,143 @@ async function fetchGitHubData() {
         const repo = match[2];
         
         try {
-            // Fetch repo data
-            const repoResponse = await fetch(`https://api.github.com/repos/${owner}/${repo}`);
-            if (repoResponse.ok) {
-                const repoData = await repoResponse.json();
-                
-                // Update stars count
-                const starsElement = card.querySelector('.stars-count span');
-                if (starsElement) {
-                    starsElement.textContent = repoData.stargazers_count;
-                }
-                
-                // Update forks count
-                const forksElement = card.querySelector('.forks-count span');
-                if (forksElement) {
-                    forksElement.textContent = repoData.forks_count;
-                }
-                
-                // Update description if available and not already set
-                if (repoData.description) {
-                    const descriptionElement = card.querySelector('.project-description');
-                    if (descriptionElement && descriptionElement.textContent.trim() === '') {
-                        descriptionElement.textContent = repoData.description;
+            // Fetch repo data with timeout
+            let repoData = null;
+            try {
+                const repoResponse = await fetch(`https://api.github.com/repos/${owner}/${repo}`);
+                if (repoResponse.ok) {
+                    repoData = await repoResponse.json();
+                    
+                    // Update stars count
+                    const starsElement = card.querySelector('.stars-count span');
+                    if (starsElement) {
+                        starsElement.textContent = repoData.stargazers_count;
                     }
+                    
+                    // Update forks count
+                    const forksElement = card.querySelector('.forks-count span');
+                    if (forksElement) {
+                        forksElement.textContent = repoData.forks_count;
+                    }
+                    
+                    // Update description if available and not already set
+                    if (repoData.description) {
+                        const descriptionElement = card.querySelector('.project-description');
+                        if (descriptionElement && descriptionElement.textContent.trim() === '') {
+                            descriptionElement.textContent = repoData.description;
+                        }
+                    }
+                } else {
+                    // Set ? for failed requests
+                    setQuestionMarks(card);
                 }
+            } catch (error) {
+                console.error(`Error fetching repo data for ${repoUrl}:`, error);
+                setQuestionMarks(card);
             }
             
             // Fetch languages
-            const languagesResponse = await fetch(`https://api.github.com/repos/${owner}/${repo}/languages`);
-            if (languagesResponse.ok) {
-                const languagesData = await languagesResponse.json();
+            try {
+                const languagesResponse = await fetch(`https://api.github.com/repos/${owner}/${repo}/languages`);
+                if (languagesResponse.ok) {
+                    const languagesData = await languagesResponse.json();
+                    const languagesElement = card.querySelector('.project-languages');
+                    
+                    if (languagesElement) {
+                        languagesElement.innerHTML = '';
+                        
+                        // Language color mapping
+                        const languageColors = {
+                            JavaScript: '#f1e05a',
+                            TypeScript: '#3178c6',
+                            HTML: '#e34c26',
+                            CSS: '#563d7c',
+                            Python: '#3572A5',
+                            Java: '#b07219',
+                            PHP: '#4F5D95',
+                            Ruby: '#701516',
+                            Go: '#00ADD8',
+                            Rust: '#dea584',
+                            C: '#555555',
+                            'C++': '#f34b7d',
+                            'C#': '#178600',
+                            Swift: '#ffac45',
+                            Kotlin: '#A97BFF',
+                            Dart: '#00B4AB',
+                            Shell: '#89e051',
+                            PowerShell: '#012456',
+                            // Add more languages as needed
+                        };
+                        
+                        Object.keys(languagesData).forEach(language => {
+                            const tag = document.createElement('span');
+                            tag.className = 'language-tag';
+                            tag.textContent = `#${language}`;
+                            
+                            // Set background color based on language
+                            const bgColor = languageColors[language] || '#6b7280';
+                            tag.style.backgroundColor = bgColor;
+                            
+                            // Set text color based on background brightness
+                            const r = parseInt(bgColor.slice(1, 3), 16);
+                            const g = parseInt(bgColor.slice(3, 5), 16);
+                            const b = parseInt(bgColor.slice(5, 7), 16);
+                            const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+                            tag.style.color = brightness > 128 ? '#000000' : '#ffffff';
+                            
+                            languagesElement.appendChild(tag);
+                        });
+                    }
+                } else {
+                    // Set placeholder for languages
+                    const languagesElement = card.querySelector('.project-languages');
+                    if (languagesElement) {
+                        languagesElement.innerHTML = '<div class="text-sm text-gray-500">Languages unavailable</div>';
+                    }
+                }
+            } catch (error) {
+                console.error(`Error fetching languages for ${repoUrl}:`, error);
                 const languagesElement = card.querySelector('.project-languages');
-                
                 if (languagesElement) {
-                    languagesElement.innerHTML = '';
-                    
-                    // Language color mapping
-                    const languageColors = {
-                        JavaScript: '#f1e05a',
-                        TypeScript: '#3178c6',
-                        HTML: '#e34c26',
-                        CSS: '#563d7c',
-                        Python: '#3572A5',
-                        Java: '#b07219',
-                        PHP: '#4F5D95',
-                        Ruby: '#701516',
-                        Go: '#00ADD8',
-                        Rust: '#dea584',
-                        C: '#555555',
-                        'C++': '#f34b7d',
-                        'C#': '#178600',
-                        Swift: '#ffac45',
-                        Kotlin: '#A97BFF',
-                        Dart: '#00B4AB',
-                        Shell: '#89e051',
-                        PowerShell: '#012456',
-                        // Add more languages as needed
-                    };
-                    
-                    Object.keys(languagesData).forEach(language => {
-                        const tag = document.createElement('span');
-                        tag.className = 'language-tag';
-                        tag.textContent = `#${language}`;
-                        
-                        // Set background color based on language
-                        const bgColor = languageColors[language] || '#6b7280';
-                        tag.style.backgroundColor = bgColor;
-                        
-                        // Set text color based on background brightness
-                        const r = parseInt(bgColor.slice(1, 3), 16);
-                        const g = parseInt(bgColor.slice(3, 5), 16);
-                        const b = parseInt(bgColor.slice(5, 7), 16);
-                        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
-                        tag.style.color = brightness > 128 ? '#000000' : '#ffffff';
-                        
-                        languagesElement.appendChild(tag);
-                    });
+                    languagesElement.innerHTML = '<div class="text-sm text-gray-500">Languages unavailable</div>';
                 }
             }
             
             // Fetch releases if needed
             if (card.querySelector('.btn-download')) {
-                const releasesResponse = await fetch(`https://api.github.com/repos/${owner}/${repo}/releases/latest`);
-                if (releasesResponse.ok) {
-                    const releaseData = await releasesResponse.json();
+                try {
+                    const releasesResponse = await fetch(`https://api.github.com/repos/${owner}/${repo}/releases/latest`);
+                    if (releasesResponse.ok) {
+                        const releaseData = await releasesResponse.json();
+                        const downloadButton = card.querySelector('.btn-download');
+                        
+                        if (downloadButton && releaseData.assets && releaseData.assets.length > 0) {
+                            downloadButton.href = releaseData.assets[0].browser_download_url;
+                            downloadButton.title = `Download ${releaseData.name || 'latest release'}`;
+                        }
+                    } else {
+                        // Handle failed release fetch
+                        const downloadButton = card.querySelector('.btn-download');
+                        if (downloadButton) {
+                            downloadButton.href = '#';
+                            downloadButton.title = 'Download unavailable';
+                            downloadButton.classList.add('opacity-50');
+                        }
+                    }
+                } catch (error) {
+                    console.error(`Error fetching releases for ${repoUrl}:`, error);
                     const downloadButton = card.querySelector('.btn-download');
-                    
-                    if (downloadButton && releaseData.assets && releaseData.assets.length > 0) {
-                        downloadButton.href = releaseData.assets[0].browser_download_url;
-                        downloadButton.title = `Download ${releaseData.name || 'latest release'}`;
+                    if (downloadButton) {
+                        downloadButton.href = '#';
+                        downloadButton.title = 'Download unavailable';
+                        downloadButton.classList.add('opacity-50');
                     }
                 }
             }
             
         } catch (error) {
             console.error(`Error fetching GitHub data for ${repoUrl}:`, error);
+            setQuestionMarks(card);
         }
     }
 }
