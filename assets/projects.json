@@ -1,0 +1,33 @@
+{
+  "Featured Projects": [
+    {
+      "box_title": "Portfolio",
+      "description": "My personal portfolio website showcasing skills, projects, and career history.",
+      "github": true,
+      "repo": "https://github.com/ProbAlex/Portfolio",
+      "live": true,
+      "deployment_link": "https://alexalex.net",
+      "releases": false
+    },
+    {
+      "box_title": "Xbacab",
+      "description": "A specialized tool for data analysis and visualization.",
+      "github": true,
+      "repo": "https://github.com/ProbAlex/Xbacab",
+      "live": false,
+      "deployment_link": "",
+      "releases": true
+    }
+  ],
+  "Side Projects": [
+    {
+      "box_title": "Example Project",
+      "description": "This is a placeholder for future projects.",
+      "github": false,
+      "repo": "",
+      "live": false,
+      "deployment_link": "",
+      "releases": false
+    }
+  ]
+}

@@ -7,6 +7,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😎</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         tailwind.config = {
             theme: {
@@ -44,14 +45,18 @@
         </div>
     </nav>
 
-    <!-- Projects Section - Empty Body Placeholder -->
-    <section class="flex-grow py-20 bg-light">
+    <!-- Projects Section -->
+    <section class="flex-grow py-12 bg-light">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center">My Projects</h2>
-            <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
-                <p class="text-lg text-center text-gray-500">
-                    Projects showcase coming soon...
-                </p>
+            
+            <!-- Projects content will be dynamically loaded here -->
+            <div id="projects-content" class="space-y-12">
+                <!-- Projects sections will be inserted here -->
+                <div class="text-center py-8">
+                    <div class="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+                    <p class="mt-4 text-gray-600">Loading projects...</p>
+                </div>
             </div>
         </div>
     </section>
