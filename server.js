@@ -7,13 +7,14 @@ const app = express();
 const port = 3000;
 
 // Middleware
+app.use('/', express.static(path.join(__dirname, 'default')));
 app.use(express.static(__dirname));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routes for each section
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, 'default/index.html'));
 });
 
 app.get('/home', (req, res) => {
