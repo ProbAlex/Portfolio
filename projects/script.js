@@ -20,31 +20,84 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.addEventListener('DOMContentLoaded', async function() {
+    console.log('Projects page loaded, attempting to fetch data...');
+    
     try {
-        // Fetch projects data
-        const response = await fetch('/assets/projects.json');
-        if (!response.ok) {
-            throw new Error('Failed to load projects data');
+        // Try different path formats to handle various deployment scenarios
+        const paths = [
+            '/assets/projects.json',           // Absolute path from domain root
+            './assets/projects.json',          // Relative to current directory
+            '../assets/projects.json',         // Up one directory
+            'https://alexalex.net/assets/projects.json' // Fully qualified URL
+        ];
+        
+        console.log('Attempting to fetch projects data from multiple possible paths...');
+        let response = null;
+        let fetchError = null;
+        
+        // Try each path until one works
+        for (const path of paths) {
+            try {
+                console.log(`Trying path: ${path}`);
+                // Add a timeout to the fetch request
+                const fetchPromise = fetch(path);
+                const timeoutPromise = new Promise((_, reject) => 
+                    setTimeout(() => reject(new Error(`Fetch timeout for ${path}`)), 5000)
+                );
+                
+                response = await Promise.race([fetchPromise, timeoutPromise]);
+                
+                if (response.ok) {
+                    console.log(`Successfully fetched from ${path}`);
+                    break; // Exit the loop if successful
+                } else {
+                    console.warn(`Failed to fetch from ${path}: ${response.status} ${response.statusText}`);
+                    fetchError = new Error(`Failed to load projects data from ${path}: ${response.status} ${response.statusText}`);
+                }
+            } catch (error) {
+                console.warn(`Error fetching from ${path}:`, error);
+                fetchError = error;
+                // Continue to the next path
+            }
         }
+        
+        // If all paths failed, throw the last error
+        if (!response || !response.ok) {
+            console.error('All fetch attempts failed');
+            throw fetchError || new Error('Failed to load projects data from any path');
+        }
+        
+        if (!response.ok) {
+            console.error(`Failed to load projects data: ${response.status} ${response.statusText}`);
+            throw new Error(`Failed to load projects data: ${response.status} ${response.statusText}`);
+        }
+        
+        console.log('Projects data fetched successfully, parsing JSON...');
         const projectsData = await response.json();
+        console.log('Projects data parsed:', projectsData);
         
         // Clear loading indicator
         document.getElementById('projects-content').innerHTML = '';
         
         // Process each section
+        console.log('Processing project sections...');
         Object.entries(projectsData).forEach(([sectionTitle, projects]) => {
+            console.log(`Creating section: ${sectionTitle} with ${projects.length} projects`);
             const sectionElement = createProjectSection(sectionTitle, projects);
             document.getElementById('projects-content').appendChild(sectionElement);
         });
 
         // Fetch GitHub data for each project
+        console.log('Fetching GitHub data for projects...');
         await fetchGitHubData();
+        console.log('All GitHub data fetched successfully');
         
     } catch (error) {
         console.error('Error loading projects:', error);
         document.getElementById('projects-content').innerHTML = `
             <div class="text-center py-8">
-                <p class="text-red-500">Error loading projects data. Please try again later.</p>
+                <p class="text-red-500">Error loading projects data: ${error.message}</p>
+                <p class="mt-2 text-gray-600">Try refreshing the page or check the console for more details.</p>
             </div>
         `;
     }
