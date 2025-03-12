@@ -23,49 +23,17 @@ document.addEventListener('DOMContentLoaded', async function() {
     console.log('Projects page loaded, attempting to fetch data...');
     
     try {
-        // Try different path formats to handle various deployment scenarios
-        const paths = [
-            '/assets/projects.json',           // Absolute path from domain root
-            './assets/projects.json',          // Relative to current directory
-            '../assets/projects.json',         // Up one directory
-            'https://alexalex.net/assets/projects.json' // Fully qualified URL
-        ];
+        // Use a simple relative path that should work in most deployment scenarios
+        const path = '../assets/projects.json';
+        console.log(`Fetching projects data from ${path}`);
         
-        console.log('Attempting to fetch projects data from multiple possible paths...');
-        let response = null;
-        let fetchError = null;
+        // Add a timeout to the fetch request
+        const fetchPromise = fetch(path);
+        const timeoutPromise = new Promise((_, reject) => 
+            setTimeout(() => reject(new Error('Fetch timeout after 10 seconds')), 10000)
+        );
         
-        // Try each path until one works
-        for (const path of paths) {
-            try {
-                console.log(`Trying path: ${path}`);
-                // Add a timeout to the fetch request
-                const fetchPromise = fetch(path);
-                const timeoutPromise = new Promise((_, reject) => 
-                    setTimeout(() => reject(new Error(`Fetch timeout for ${path}`)), 5000)
-                );
-                
-                response = await Promise.race([fetchPromise, timeoutPromise]);
-                
-                if (response.ok) {
-                    console.log(`Successfully fetched from ${path}`);
-                    break; // Exit the loop if successful
-                } else {
-                    console.warn(`Failed to fetch from ${path}: ${response.status} ${response.statusText}`);
-                    fetchError = new Error(`Failed to load projects data from ${path}: ${response.status} ${response.statusText}`);
-                }
-            } catch (error) {
-                console.warn(`Error fetching from ${path}:`, error);
-                fetchError = error;
-                // Continue to the next path
-            }
-        }
-        
-        // If all paths failed, throw the last error
-        if (!response || !response.ok) {
-            console.error('All fetch attempts failed');
-            throw fetchError || new Error('Failed to load projects data from any path');
-        }
+        const response = await Promise.race([fetchPromise, timeoutPromise]);
         
         if (!response.ok) {
             console.error(`Failed to load projects data: ${response.status} ${response.statusText}`);
