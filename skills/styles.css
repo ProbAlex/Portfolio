@@ -84,20 +84,8 @@ nav a.active {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background: #f3f4f6;
-    top: 0;
-}
-
-.gauge-fill {
-    position: absolute;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
     background: linear-gradient(to right, #ef4444 0%, #f59e0b 50%, #10b981 100%);
-    clip-path: polygon(50% 50%, 50% 0, 100% 0, 100% 100%, 0 100%, 0 0, 50% 0);
-    transform-origin: center;
     top: 0;
-    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .gauge-center {

@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', async function() {
     try {
         // Fetch skills data
-        const response = await fetch('../assets/skills.json');
+        const response = await fetch('/assets/skills.json');
         if (!response.ok) {
             throw new Error('Failed to load skills data');
         }
@@ -197,17 +197,12 @@ function createEnhancedConfidenceGauge(confidence) {
     
     const gaugeBackground = document.createElement('div');
     gaugeBackground.className = 'gauge-background';
-    
-    const gaugeFill = document.createElement('div');
-    gaugeFill.className = 'gauge-fill';
-    
+
     // Calculate rotation based on confidence (1-10 scale)
     // 0 confidence = -90deg (left), 10 confidence = 90deg (right)
     const rotation = -90 + (confidence - 1) / 9 * 180;
-    gaugeFill.style.transform = `rotate(${rotation}deg)`;
-    
-    // Create a custom colored gauge fill based on the confidence value
-    // This ensures the color at the needle position matches the confidence level
+
+    // Color the needle based on where it lands on the scale
     let needleColor;
     if (confidence < 4) {
         needleColor = '#ef4444'; // Red for low confidence
@@ -226,7 +221,6 @@ function createEnhancedConfidenceGauge(confidence) {
     gaugeNeedle.style.backgroundColor = needleColor;
     
     gaugeContainer.appendChild(gaugeBackground);
-    gaugeContainer.appendChild(gaugeFill);
     gaugeContainer.appendChild(gaugeCenter);
     gaugeContainer.appendChild(gaugeNeedle);
     

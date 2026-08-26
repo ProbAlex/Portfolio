@@ -4,15 +4,14 @@ const bodyParser = require('body-parser');
 const axios = require('axios');
 const fs = require('fs');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // Middleware
-app.use('/', express.static(path.join(__dirname, 'default')));
-app.use(express.static(__dirname));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Routes for each section
+// Routes for each section (must come before the static mounts below so that
+// e.g. "/home" is served directly instead of being redirected by express.static)
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'default/index.html'));
 });
@@ -37,11 +36,21 @@ app.get('/contact', (req, res) => {
     res.sendFile(path.join(__dirname, 'contact/index.html'));
 });
 
+// Static assets. Only the folders the site actually needs are exposed here -
+// note this intentionally excludes server.js, package.json, node_modules, etc.
+app.use('/assets', express.static(path.join(__dirname, 'assets')));
+app.use('/home', express.static(path.join(__dirname, 'home')));
+app.use('/skills', express.static(path.join(__dirname, 'skills')));
+app.use('/career', express.static(path.join(__dirname, 'career')));
+app.use('/projects', express.static(path.join(__dirname, 'projects')));
+app.use('/contact', express.static(path.join(__dirname, 'contact')));
+app.use('/', express.static(path.join(__dirname, 'default')));
+
 // API endpoint for contact form
 app.post('/api/contact', async (req, res) => {
     try {
         // Get webhook URL from webhook.json
-        const webhookData = JSON.parse(fs.readFileSync('webhook.json', 'utf8'));
+        const webhookData = JSON.parse(fs.readFileSync(path.join(__dirname, 'webhook.json'), 'utf8'));
         const webhookUrl = webhookData.discord;
         
         const { name, email, message } = req.body;

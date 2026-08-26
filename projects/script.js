@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     try {
         // Use a path that works with both HTTP and HTTPS
         // First try a relative path
-        let path = '../assets/projects.json';
+        let path = '/assets/projects.json';
         console.log(`Fetching projects data from ${path}`);
         
         // Add a timeout to the fetch request

@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', async function() {
     try {
         // Fetch the career timeline data
-        const response = await fetch('../assets/career.json');
+        const response = await fetch('/assets/career.json');
         const careerData = await response.json();
         
         // Create the timeline

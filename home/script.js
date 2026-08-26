@@ -4,7 +4,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Only apply cursor effect to sections with the cursor-effect class
     const cursorCanvas = document.getElementById('cursor-canvas');
-    
+
     if (!cursorCanvas) return;
     
     const ctx = cursorCanvas.getContext('2d');
@@ -40,15 +40,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Track cursor position
     document.addEventListener('mousemove', function(e) {
         const rect = cursorCanvas.getBoundingClientRect();
-        const sectionTop = rect.top + window.scrollY;
-        const sectionBottom = sectionTop + rect.height;
-        const scrollY = window.scrollY;
-        
+
         // Only track cursor if it's within the section with the effect
-        if (scrollY >= sectionTop && scrollY <= sectionBottom) {
+        if (e.clientX >= rect.left && e.clientX <= rect.right &&
+            e.clientY >= rect.top && e.clientY <= rect.bottom) {
             cursor.x = e.clientX - rect.left;
-            cursor.y = e.clientY - rect.top + (scrollY - sectionTop);
-            
+            cursor.y = e.clientY - rect.top;
+
             // Add new particles when mouse moves
             if (Math.abs(cursor.x - cursor.lastX) > 5 || Math.abs(cursor.y - cursor.lastY) > 5) {
                 addParticle(cursor.x, cursor.y);

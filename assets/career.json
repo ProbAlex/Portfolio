@@ -8,5 +8,20 @@
     "click_url": "https://www.molloyhs.org/",
     "month": 9,
     "year": 2021
+  },
+  "Junior React Developer @ 8ForgeStudios": {
+    "click_url": "https://8forgestudios.com/",
+    "month": 4,
+    "year": 2025
+  },
+  "College": {
+    "click_url": "https://www.nyit.edu/",
+    "month": 9,
+    "year": 2025
+  },
+  "Full Stack Developer @ TireDashMobile": {
+    "click_url": "https://www.tiredashmobile.ca/",
+    "month": 6,
+    "year": 2026
   }
 }
