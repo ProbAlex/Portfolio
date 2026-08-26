@@ -1,0 +1,795 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #3b82f6;
+  --color-secondary: #10b981;
+  --color-accent: #8b5cf6;
+  --color-dark: #1f2937;
+  --color-light: #f3f4f6;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+section {
+  transition: background-color 0.5s ease;
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* ---------- Home: headshot glow + download button sparkle ---------- */
+
+.shadow-glow-red {
+  box-shadow: 0 0 15px 5px rgba(239, 68, 68, 0.7);
+  transition: box-shadow 0.3s ease;
+}
+
+.shadow-glow-red:hover {
+  box-shadow: 0 0 20px 8px rgba(239, 68, 68, 0.8);
+}
+
+.headshot-container {
+  border: 3px solid rgba(239, 68, 68, 0.8);
+  position: relative;
+  z-index: 5;
+}
+
+.headshot-container img {
+  transition: transform 0.3s ease;
+}
+
+.headshot-container:hover img {
+  transform: scale(1.05);
+}
+
+.shadow-sparkle-blue {
+  box-shadow:
+    0 0 10px 2px rgba(59, 130, 246, 0.7),
+    0 0 15px 5px rgba(96, 165, 250, 0.4);
+  border-color: rgba(59, 130, 246, 0.7);
+  transition: all 0.3s ease;
+}
+
+.shadow-sparkle-blue:hover {
+  box-shadow:
+    0 0 15px 5px rgba(59, 130, 246, 0.8),
+    0 0 20px 8px rgba(96, 165, 250, 0.6);
+  transform: translateY(-2px);
+}
+
+/* Align the 'D' in Dial with the 'D' in Alexander */
+h1 span:nth-child(2) {
+  margin-left: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  h1 span:nth-child(2) {
+    margin-left: 0.75rem;
+  }
+
+  nav ul {
+    font-size: 0.9rem;
+  }
+}
+
+/* Cursor trail canvas */
+.cursor-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+#cursor-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ---------- "Punched through the wall" hole (Kool-Aid Man / cartoon hole-in-drywall bit) ---------- */
+
+.wall-punch {
+  /* A mostly-round silhouette with a couple of bitten-out notches and
+     jagged shard points, so it reads as a fist-punched hole with torn
+     edges rather than a symmetric decorative star. */
+  --wall-punch-clip: polygon(
+    90% 50%, 84% 64%, 80% 80%, 58% 68%, 50% 94%, 35% 86%, 25% 76%,
+    12% 66%, 12% 50%, 4% 31%, 24% 24%, 35% 13%, 50% 28%, 68% 6%, 78% 22%, 88% 34%
+  );
+  position: relative;
+  width: 260px;
+  height: 260px;
+  margin: 0 auto;
+  z-index: 5;
+}
+
+/* No backdrop panel on purpose: the page's own background is the "wall."
+   The torn layers below sit directly on it so it reads as a hole punched
+   through the background itself, not a separate wall bolted on top of it. */
+
+/* Stress cracks radiating out from the hole, across the page background */
+.wall-punch-crack {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 2px;
+  width: 42px;
+  background: linear-gradient(90deg, rgba(60, 53, 41, 0.55), transparent);
+  transform-origin: left center;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.wall-punch-crack-1 { transform: rotate(-28deg) translateX(58px); }
+.wall-punch-crack-2 { transform: rotate(35deg) translateX(50px); }
+.wall-punch-crack-3 { transform: rotate(150deg) translateX(54px); }
+.wall-punch-crack-4 { transform: rotate(-155deg) translateX(46px); }
+
+/* Soft dark lip behind the torn edge, shape-following via the same clip
+   path (not a box-shadow), so the "lift off the page" cue stays hole-shaped */
+.wall-punch-shadow {
+  position: absolute;
+  inset: 0;
+  clip-path: var(--wall-punch-clip);
+  background: rgba(0, 0, 0, 0.4);
+  filter: blur(5px);
+  transform: translate(5px, 8px);
+  z-index: 2;
+}
+
+/* Outer torn layer: the punched-open face of the background */
+.wall-punch-outer {
+  position: absolute;
+  inset: 0;
+  clip-path: var(--wall-punch-clip);
+  background: linear-gradient(160deg, #faf6ec 0%, #e9e1cd 100%);
+  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.15);
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.3));
+  z-index: 3;
+}
+
+/* Mid torn layer: what's exposed just beneath the surface */
+.wall-punch-mid {
+  position: absolute;
+  inset: 7%;
+  clip-path: var(--wall-punch-clip);
+  background: linear-gradient(160deg, #cdbfa4 0%, #a89678 100%);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 4;
+}
+
+/* Inner opening: where the face pokes through */
+.wall-punch-inner {
+  position: absolute;
+  inset: 15%;
+  clip-path: var(--wall-punch-clip);
+  overflow: hidden;
+  background: #000;
+  z-index: 5;
+}
+
+.wall-punch-photo {
+  object-fit: cover;
+  transform: scale(1.25) translateY(6px);
+  filter: brightness(1.05) contrast(1.15);
+}
+
+.wall-punch-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, transparent 35%, rgba(0, 0, 0, 0.55) 100%);
+  pointer-events: none;
+}
+
+/* Fallen debris chunks, resting directly on the page background below the hole */
+.wall-punch-debris {
+  position: absolute;
+  background: linear-gradient(160deg, #f2ecdd, #cdbfa4);
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.25);
+  z-index: 1;
+}
+
+.wall-punch-debris-1 {
+  width: 18px;
+  height: 14px;
+  bottom: -8px;
+  left: 22%;
+  border-radius: 40% 60% 55% 45% / 50% 40% 60% 50%;
+  transform: rotate(-15deg);
+}
+
+.wall-punch-debris-2 {
+  width: 12px;
+  height: 10px;
+  bottom: -14px;
+  left: 42%;
+  border-radius: 55% 45% 50% 50% / 45% 55% 45% 55%;
+  transform: rotate(20deg);
+}
+
+.wall-punch-debris-3 {
+  width: 20px;
+  height: 15px;
+  bottom: -10px;
+  right: 20%;
+  border-radius: 50% 50% 45% 55% / 55% 45% 55% 45%;
+  transform: rotate(10deg);
+}
+
+.wall-punch-debris-4 {
+  width: 10px;
+  height: 8px;
+  bottom: -18px;
+  right: 38%;
+  border-radius: 45% 55% 50% 50% / 50% 50% 45% 55%;
+  transform: rotate(-25deg);
+}
+
+@media (max-width: 768px) {
+  .wall-punch {
+    width: 180px;
+    height: 180px;
+    margin: 30px auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .wall-punch {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+/* Landing hero "Enter" style button glow (kept for reuse elsewhere) */
+.enter-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease;
+}
+
+.enter-button:hover {
+  transform: translateY(-5px);
+}
+
+.enter-button::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(transparent, rgba(59, 130, 246, 0.3), transparent 30%);
+  animation: rotate 4s linear infinite;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+
+/* ---------- Skills page ---------- */
+
+.skills-container {
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #3b82f6 #f3f4f6;
+  padding: 20px 0;
+}
+
+.skills-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.skills-container::-webkit-scrollbar-track {
+  background: #f3f4f6;
+  border-radius: 4px;
+}
+
+.skills-container::-webkit-scrollbar-thumb {
+  background-color: #3b82f6;
+  border-radius: 4px;
+}
+
+.skill-card {
+  min-width: 280px;
+  max-width: 280px;
+  transition: all 0.3s ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-5px);
+}
+
+.proficiency-bar {
+  height: 10px;
+  border-radius: 5px;
+  background: linear-gradient(to right, #ef4444, #f59e0b, #10b981);
+  position: relative;
+}
+
+.proficiency-indicator {
+  position: absolute;
+  top: -6px;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid #1f2937;
+}
+
+.frameworks-list {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+
+.frameworks-list.active {
+  max-height: 500px;
+}
+
+.confidence-gauge {
+  position: relative;
+  width: 60px;
+  height: 30px;
+  overflow: hidden;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.2));
+}
+
+.gauge-background {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(to right, #ef4444 0%, #f59e0b 50%, #10b981 100%);
+  top: 0;
+}
+
+.gauge-center {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+  top: 15px;
+  left: 15px;
+  z-index: 2;
+}
+
+.gauge-needle {
+  position: absolute;
+  width: 2px;
+  height: 22px;
+  background: #1f2937;
+  top: 8px;
+  left: 29px;
+  transform-origin: bottom center;
+  z-index: 3;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+.gauge-needle::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #1f2937;
+  top: -3px;
+  left: -2px;
+}
+
+.logo-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+}
+
+.logo-circle img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.framework-logo {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+}
+
+.framework-logo img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.toggle-frameworks {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.toggle-frameworks.active {
+  transform: rotate(180deg);
+}
+
+.frameworks-header {
+  transition: background-color 0.3s ease;
+}
+
+.frameworks-header:hover {
+  background-color: rgba(59, 130, 246, 0.1);
+}
+
+/* ---------- Career timeline ---------- */
+
+.timeline-item {
+  display: flex;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 1.25rem;
+  top: 2.5rem;
+  bottom: -1.5rem;
+  width: 2px;
+  background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+}
+
+.timeline-dot {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: #3b82f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.timeline-dot:hover {
+  transform: scale(1.1);
+  box-shadow:
+    0 0 0 6px rgba(59, 130, 246, 0.3),
+    0 0 15px rgba(59, 130, 246, 0.4);
+}
+
+.timeline-dot-inner {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.timeline-content {
+  flex-grow: 1;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.timeline-content:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.timeline-title {
+  font-weight: 700;
+  font-size: 1.125rem;
+  margin-bottom: 0.25rem;
+  color: #1f2937;
+  cursor: pointer;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+.timeline-title:hover {
+  color: #3b82f6;
+}
+
+.timeline-date {
+  color: #6b7280;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+@media (max-width: 640px) {
+  .timeline-dot {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .timeline-dot-inner {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .timeline-item:not(:last-child)::after {
+    left: 1rem;
+  }
+}
+
+/* ---------- Projects page ---------- */
+
+.projects-container {
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #3b82f6 #f3f4f6;
+  padding: 20px 0;
+}
+
+.projects-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.projects-container::-webkit-scrollbar-track {
+  background: #f3f4f6;
+  border-radius: 4px;
+}
+
+.projects-container::-webkit-scrollbar-thumb {
+  background-color: #3b82f6;
+  border-radius: 4px;
+}
+
+.project-card {
+  min-width: 320px;
+  max-width: 320px;
+  transition: all 0.3s ease;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #3b82f6;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.project-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.project-title {
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+.project-stats {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.project-description {
+  margin-bottom: 1.5rem;
+  color: #4b5563;
+}
+
+.project-languages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.language-tag {
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.project-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-live {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #ef4444;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.btn-live:hover {
+  background-color: #dc2626;
+}
+
+.btn-live .recording-icon {
+  width: 0.75rem;
+  height: 0.75rem;
+  background-color: white;
+  border-radius: 50%;
+  position: relative;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 5px rgba(255, 255, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+
+.btn-download {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #10b981;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  transition: background-color 0.2s;
+}
+
+.btn-download:hover {
+  background-color: #059669;
+}
+
+.btn-github {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #1f2937;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  transition: background-color 0.2s;
+  width: 100%;
+}
+
+.btn-github:hover {
+  background-color: #111827;
+}
+
+@media (max-width: 640px) {
+  .project-card {
+    min-width: 280px;
+  }
+}
+
+/* ---------- Contact page ---------- */
+
+.contact-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
+  border-radius: 16px;
+  box-shadow:
+    0 10px 30px -5px rgba(0, 0, 0, 0.1),
+    0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+}
+
+.contact-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #10b981);
+}
+
+.input-field {
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  background-color: #f9fafb;
+}
+
+.input-field:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+  background-color: white;
+  outline: none;
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.contact-info-item {
+  transition: all 0.3s ease;
+}
+
+.contact-info-item:hover {
+  transform: translateX(5px);
+}
+
+.linkedin-icon {
+  transition: all 0.3s ease;
+}
+
+.linkedin-icon:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 8px rgba(10, 102, 194, 0.6));
+}
+
+.time-display {
+  background: linear-gradient(135deg, #1f2937, #374151);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  color: white;
+  display: inline-block;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.available-times {
+  background: linear-gradient(135deg, #10b981, #059669);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  color: white;
+  display: inline-block;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}

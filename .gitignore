@@ -21,6 +21,7 @@ yarn-error.log
 /dist
 /.next/
 /out/
+.vercel
 
 # Cache
 .cache/
