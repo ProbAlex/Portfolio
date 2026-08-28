@@ -51,7 +51,7 @@ export default function HomePage() {
           </h2>
           <p className="text-xl max-w-3xl mx-auto">
             Student developer at New York Tech turning curiosity about how things work into
-            Java and JavaScript projects from web apps like this one to open-source
+            Java and JavaScript projects, from web apps like this one to open-source
             automation tools.
           </p>
 
@@ -94,11 +94,12 @@ export default function HomePage() {
             <p className="text-lg leading-relaxed text-gray-700">
               I&apos;m a student developer at New York Institute of Technology with a passion
               for creative software development, especially in Java and JavaScript. Before I
-              write a single line of code, I like to slow down and carefully map out my plan
+              write a single line of code, I like to slow down and carefully map out my plan.
               I&apos;d rather spend extra time in the design phase than untangle a mess
-              later. Outside of class, I build open-source automation tools and apps I would find useful,
-              making my life easier and more efficient. Right now, I&apos;m open to internship and full-time
-              opportunities where I can sharpen my skills and contribute to real-world software projects.
+              later. Outside of class, I build open-source automation tools and apps I find useful,
+              making my own life easier and more efficient. Right now, I&apos;m open to internship
+              and full-time opportunities where I can sharpen my skills and contribute to
+              real-world software projects.
             </p>
           </div>
         </div>

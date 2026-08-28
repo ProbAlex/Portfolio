@@ -6,27 +6,25 @@
       "github": true,
       "repo": "https://github.com/ProbAlex/Portfolio",
       "live": true,
-      "deployment_link": "https://alexalex.net",
+      "deployment_link": "https://dialalex.net",
       "releases": false
     },
     {
-      "box_title": "Xbacab",
-      "description": "A specialized tool for data analysis and visualization.",
+      "box_title": "Noisitron",
+      "description": "A Linux soundboard that mixes audio clips into a virtual mic for Discord, while you monitor playback through your own headphones.",
       "github": true,
-      "repo": "https://github.com/ProbAlex/Xbacab",
+      "repo": "https://github.com/ProbAlex/Noisitron",
       "live": false,
       "deployment_link": "",
       "releases": true
-    }
-  ],
-  "Side Projects": [
+    },
     {
-      "box_title": "Example Project",
-      "description": "This is a placeholder for future projects.",
-      "github": false,
-      "repo": "",
-      "live": false,
-      "deployment_link": "",
+      "box_title": "Noisitron Website",
+      "description": "The marketing site for Noisitron, introducing the app and pointing Linux users to the latest release.",
+      "github": true,
+      "repo": "https://github.com/ProbAlex/NoisitronWebsite",
+      "live": true,
+      "deployment_link": "https://noisitron.com",
       "releases": false
     }
   ]
