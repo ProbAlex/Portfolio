@@ -614,6 +614,17 @@ h1 span:nth-child(2) {
   color: #4b5563;
 }
 
+.project-role {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 9999px;
+  background-color: #dbeafe;
+  color: #1d4ed8;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
 .project-languages {
   display: flex;
   flex-wrap: wrap;

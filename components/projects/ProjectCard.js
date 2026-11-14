@@ -116,6 +116,8 @@ export default function ProjectCard({ project }) {
         )}
       </div>
 
+      {project.role && <span className="project-role">{project.role}</span>}
+
       <p className="project-description">{project.description}</p>
 
       {project.github && (

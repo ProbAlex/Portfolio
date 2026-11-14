@@ -108,6 +108,8 @@ export default function HomePage() {
       <CTASection
         heading="Have a job in mind?"
         subtext="I'm open to internships and full-time roles where I can sharpen my skills and contribute to real-world software. Let's talk about what you're building."
+        secondaryHref="/projects"
+        secondaryLabel="Check Out My Projects"
       />
     </>
   );
