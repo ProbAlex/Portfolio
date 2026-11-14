@@ -1,12 +1,12 @@
 {
-  "Featured Projects": [
+  "Applications": [
     {
-      "box_title": "Portfolio",
-      "description": "My personal portfolio website showcasing skills, projects, and career history.",
+      "box_title": "Yappitron",
+      "description": "A self-hosted, end-to-end encrypted messenger with live typing, so the other person sees your message as you write it. Flutter client, Rust core and gateway, MLS and OPAQUE. Early development.",
       "github": true,
-      "repo": "https://github.com/ProbAlex/Portfolio",
-      "live": true,
-      "deployment_link": "https://dialalex.net",
+      "repo": "https://github.com/ProbAlex/yappitron",
+      "live": false,
+      "deployment_link": "",
       "releases": false
     },
     {
@@ -17,6 +17,17 @@
       "live": false,
       "deployment_link": "",
       "releases": true
+    }
+  ],
+  "Websites": [
+    {
+      "box_title": "Portfolio",
+      "description": "My personal portfolio website showcasing skills, projects, and career history.",
+      "github": true,
+      "repo": "https://github.com/ProbAlex/Portfolio",
+      "live": true,
+      "deployment_link": "https://dialalex.net",
+      "releases": false
     },
     {
       "box_title": "Noisitron Website",

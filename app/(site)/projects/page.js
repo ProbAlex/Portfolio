@@ -1,5 +1,6 @@
 import projectsData from "@/data/projects.json";
 import ProjectCard from "@/components/projects/ProjectCard";
+import HomelabSection from "@/components/projects/HomelabSection";
 import CTASection from "@/components/CTASection";
 
 export const metadata = {
@@ -26,6 +27,11 @@ export default function ProjectsPage() {
                 </div>
               </div>
             ))}
+
+            <div className="mb-12">
+              <h3 className="text-2xl font-bold mb-6 text-center md:text-left">Homelab</h3>
+              <HomelabSection />
+            </div>
           </div>
         </div>
       </section>
