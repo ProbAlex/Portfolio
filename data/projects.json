@@ -1,4 +1,26 @@
 {
+  "Professional Experience": [
+    {
+      "box_title": "TireDash Mobile",
+      "role": "Sole developer",
+      "description": "Website for a mobile seasonal tire swap service. I designed and built the entire site, and it generated over $1,000 in revenue in its first season.",
+      "github": false,
+      "repo": "",
+      "live": true,
+      "deployment_link": "https://tiredashmobile.ca",
+      "releases": false
+    },
+    {
+      "box_title": "STFRD",
+      "role": "Junior React Developer @ 8Forge Studios",
+      "description": "Site for a strategic marketing communications agency, built and maintained by 8Forge Studios under contract. As a junior developer there, I made small edits within a full team workflow, like a normal company.",
+      "github": false,
+      "repo": "",
+      "live": true,
+      "deployment_link": "https://stfrd.com",
+      "releases": false
+    }
+  ],
   "Applications": [
     {
       "box_title": "Yappitron",
