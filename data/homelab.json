@@ -1,0 +1,32 @@
+{
+  "title": "leafyserver",
+  "tagline": "A personal homelab that started as a box for Jellyfin and grew into a full self-hosted stack.",
+  "link": "https://leafyserver.tech",
+  "highlights": [
+    {
+      "icon": "fa-film",
+      "title": "Media",
+      "description": "Streams movies and shows, with a request system for new titles."
+    },
+    {
+      "icon": "fa-gamepad",
+      "title": "Gaming",
+      "description": "Dedicated Minecraft, Terraria, and Hytale servers managed through Pelican Panel."
+    },
+    {
+      "icon": "fa-folder-open",
+      "title": "Office",
+      "description": "Private cloud storage plus collaborative docs, sheets, and slides."
+    },
+    {
+      "icon": "fa-toolbox",
+      "title": "Utility",
+      "description": "Private search with SearXNG, local smart home automation, and a local AI chat assistant."
+    },
+    {
+      "icon": "fa-network-wired",
+      "title": "Infrastructure",
+      "description": "Monitoring, networking, and the VPN the rest of the setup relies on."
+    }
+  ]
+}

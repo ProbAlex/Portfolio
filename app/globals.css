@@ -704,6 +704,16 @@ h1 span:nth-child(2) {
   background-color: #111827;
 }
 
+.homelab-panel {
+  border: 2px solid #3b82f6;
+}
+
+.homelab-item {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: #f3f4f6;
+}
+
 @media (max-width: 640px) {
   .project-card {
     min-width: 280px;
