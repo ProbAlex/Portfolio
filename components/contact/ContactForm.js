@@ -68,6 +68,27 @@ function useClock() {
   return time;
 }
 
+const DETAILS = [
+  {
+    icon: "fa-solid fa-envelope",
+    label: "Email",
+    value: "alex.dial@outlook.com",
+    href: "mailto:alex.dial@outlook.com",
+  },
+  {
+    icon: "fa-solid fa-phone",
+    label: "Phone",
+    value: "+1 (347) 859-6566",
+    href: "tel:+13478596566",
+  },
+  {
+    icon: "fa-brands fa-linkedin-in",
+    label: "LinkedIn",
+    value: "in/1AlexanderDial",
+    href: "https://www.linkedin.com/in/1AlexanderDial",
+  },
+];
+
 export default function ContactForm() {
   const time = useClock();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -93,146 +114,154 @@ export default function ContactForm() {
       const data = await response.json();
 
       if (data.success) {
-        setStatus({ text: "Message sent successfully!", tone: "success" });
+        setStatus({ text: "Message sent. I'll get back to you soon.", tone: "success" });
         setForm({ name: "", email: "", message: "" });
       } else {
         setStatus({ text: data.message || "Failed to send message. Please try again.", tone: "error" });
       }
     } catch (error) {
-      setStatus({ text: "An error occurred. Please try again later.", tone: "error" });
+      setStatus({ text: "Something went wrong. Please try again later.", tone: "error" });
     } finally {
       setSubmitting(false);
     }
   }
 
   const toneClasses = {
-    info: "bg-blue-100 text-blue-800",
-    success: "bg-green-100 text-green-800",
-    error: "bg-red-100 text-red-800",
+    info: "border-line bg-canvas text-body",
+    success: "border-accent/30 bg-accent-soft text-accent-strong",
+    error: "border-red-200 bg-red-50 text-red-700",
   };
 
+  const inputClasses =
+    "w-full rounded-xl border border-line bg-canvas px-4 py-3 text-base text-ink placeholder:text-zinc-400 transition focus:border-accent focus:bg-surface focus:outline-none focus:ring-[3px] focus:ring-accent/20";
+
   return (
-    <div className="max-w-4xl mx-auto contact-card p-8 md:p-10">
-      {/* Top Section with LinkedIn, Email, Phone, and Time */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 pb-8 border-b border-gray-200">
-        <div className="mb-6 md:mb-0">
-          <div className="contact-info-item flex items-center mb-4">
-            <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-4">
-              <i className="fas fa-envelope text-primary"></i>
-            </div>
-            <a
-              href="mailto:alex.dial@outlook.com"
-              className="text-gray-700 hover:text-primary transition-colors"
-            >
-              alex.dial@outlook.com
-            </a>
-          </div>
-          <div className="contact-info-item flex items-center">
-            <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-4">
-              <i className="fas fa-phone text-primary"></i>
-            </div>
-            <a href="tel:+13478596566" className="text-gray-700 hover:text-primary transition-colors">
-              +1 (347) 859-6566
-            </a>
-          </div>
-        </div>
+    <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-12">
+      {/* Direct contact details */}
+      <div className="reveal space-y-6">
+        <ul className="card divide-y divide-line">
+          {DETAILS.map((detail) => {
+            const external = detail.href.startsWith("http");
+            return (
+              <li key={detail.label}>
+                <a
+                  href={detail.href}
+                  target={external ? "_blank" : undefined}
+                  rel={external ? "noopener noreferrer" : undefined}
+                  className="group flex min-h-[64px] items-center gap-4 px-5 py-3 transition-colors hover:bg-canvas"
+                >
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-accent-soft text-accent">
+                    <i className={detail.icon} aria-hidden="true" />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block font-mono text-[0.7rem] uppercase tracking-[0.08em] text-muted">
+                      {detail.label}
+                    </span>
+                    <span className="block truncate font-medium text-ink group-hover:text-accent">
+                      {detail.value}
+                    </span>
+                  </span>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
 
-        <div className="flex flex-col items-end">
+        <div className="card space-y-3 p-5">
+          <div className="flex items-center gap-3 text-sm text-body">
+            <i className="far fa-clock w-4 text-muted" aria-hidden="true" />
+            <span>
+              My time: <span className="font-mono text-ink">{time || "Loading..."}</span>
+            </span>
+          </div>
+          <div className="flex items-center gap-3 text-sm text-body">
+            <i className="fas fa-calendar-check w-4 text-muted" aria-hidden="true" />
+            <span>
+              Available <span className="font-medium text-ink">4 PM to 9 PM EST</span>
+            </span>
+          </div>
           <a
-            href="https://www.linkedin.com/in/1AlexanderDial"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="linkedin-icon mb-4"
+            href="/Alexander_Dial_Resume_FullStack.pdf"
+            download
+            className="text-link text-sm"
           >
-            <div className="w-12 h-12 rounded-full bg-[#0A66C2] flex items-center justify-center">
-              <i className="fab fa-linkedin-in text-white text-xl"></i>
-            </div>
+            <i className="fas fa-file-arrow-down" aria-hidden="true" />
+            Download my résumé
           </a>
-
-          <div className="time-display mb-2">
-            <i className="far fa-clock mr-2"></i>
-            <span>{time || "Loading..."}</span>
-          </div>
-
-          <div className="available-times">
-            <i className="fas fa-calendar-check mr-2"></i>
-            Available: 4PM - 9PM EST
-          </div>
         </div>
       </div>
 
-      {/* Contact Form */}
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="text-center mb-6">
-          <h3 className="text-2xl font-semibold text-gray-800">Send Me a Message</h3>
-          <p className="text-gray-500">I&apos;ll get back to you as soon as possible.</p>
+      {/* Contact form */}
+      <form
+        onSubmit={handleSubmit}
+        className="card reveal space-y-5 p-6 md:p-8"
+        style={{ "--i": 1 }}
+      >
+        <div>
+          <h2 className="text-2xl font-semibold tracking-tight text-ink">Send me a message</h2>
+          <p className="mt-1 text-body">I&apos;ll get back to you as soon as I can.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid gap-5 sm:grid-cols-2">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-ink">
               Name
             </label>
             <input
               type="text"
               id="name"
               name="name"
+              autoComplete="name"
               value={form.name}
               onChange={handleChange}
-              className="input-field w-full px-4 py-3 rounded-lg"
+              className={inputClasses}
               placeholder="Your name"
               required
             />
           </div>
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-ink">
               Email
             </label>
             <input
               type="email"
               id="email"
               name="email"
+              autoComplete="email"
               value={form.email}
               onChange={handleChange}
-              className="input-field w-full px-4 py-3 rounded-lg"
-              placeholder="Your email address"
+              className={inputClasses}
+              placeholder="you@company.com"
               required
             />
           </div>
         </div>
 
         <div>
-          <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-ink">
             Message
           </label>
           <textarea
             id="message"
             name="message"
-            rows={5}
+            rows={6}
             value={form.message}
             onChange={handleChange}
-            className="input-field w-full px-4 py-3 rounded-lg resize-none"
-            placeholder="Hey Alex, love the website! I'd like to chat about some opportunities you might like! 🎉"
+            className={`${inputClasses} resize-none`}
+            placeholder="Hi Alex, I'd like to talk about a role on our team."
             required
           />
         </div>
 
-        <div className="flex justify-center">
-          <button
-            type="submit"
-            disabled={submitting}
-            className="submit-btn text-white font-medium py-3 px-8 rounded-lg disabled:opacity-60"
-          >
-            Send Message
-          </button>
-        </div>
+        <button type="submit" disabled={submitting} className="btn btn-primary w-full disabled:opacity-60 sm:w-auto">
+          {submitting ? "Sending..." : "Send message"}
+          {!submitting && <i className="fas fa-paper-plane text-sm" aria-hidden="true" />}
+        </button>
 
         {status && (
-          <div className="text-center">
-            <p className={`py-2 px-4 rounded-lg inline-block ${toneClasses[status.tone]}`}>
-              {status.text}
-            </p>
-          </div>
+          <p role="status" className={`rounded-xl border px-4 py-3 text-sm ${toneClasses[status.tone]}`}>
+            {status.text}
+          </p>
         )}
       </form>
     </div>

@@ -96,28 +96,32 @@ export default function LandingPage() {
   }, [launch]);
 
   return (
-    <div className="relative h-screen w-full overflow-hidden bg-[linear-gradient(135deg,#1f2937_0%,#111827_100%)] text-white">
+    <div className="relative min-h-[100dvh] w-full overflow-hidden bg-night text-white">
       <div
-        className={`flex h-full w-full flex-col items-center justify-center transition-all duration-700 ease-in ${
+        className={`flex min-h-[100dvh] w-full flex-col items-center justify-center px-4 text-center transition-all duration-700 ease-in ${
           warping ? "scale-90 opacity-0 blur-sm" : "scale-100 opacity-100"
         }`}
       >
-        <div className="mb-12 text-center">
-          <h1 className="text-6xl md:text-7xl font-bold mb-4">
-            <span className="block">Alexander</span>
-            <span className="block">Dial</span>
-          </h1>
-          <p className="text-xl text-gray-300 mt-4">Portfolio</p>
-        </div>
-
-        <button
-          type="button"
-          onClick={launch}
-          className="enter-button bg-dark border-2 border-primary rounded-lg px-12 py-4 text-xl font-bold shadow-sparkle-blue"
+        <p className="eyebrow reveal text-accent-bright">Portfolio</p>
+        <h1
+          className="reveal mt-4 text-[clamp(3rem,12vw,6rem)] font-semibold leading-[0.95] tracking-[-0.035em]"
+          style={{ "--i": 1 }}
         >
-          Enter
-        </button>
-        <p className="mt-4 text-sm text-gray-500">or press Enter</p>
+          Alexander Dial
+        </h1>
+        <p className="reveal mt-5 max-w-md text-lg text-zinc-400" style={{ "--i": 2 }}>
+          Student developer at New York Tech
+        </p>
+
+        <div className="reveal mt-10" style={{ "--i": 3 }}>
+          <button type="button" onClick={launch} className="btn btn-primary px-10 text-lg">
+            Enter
+            <i className="fas fa-arrow-right text-sm" aria-hidden="true" />
+          </button>
+        </div>
+        <p className="reveal mt-4 hidden text-sm text-zinc-500 md:block" style={{ "--i": 4 }}>
+          or press Enter
+        </p>
       </div>
 
       <canvas

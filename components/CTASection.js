@@ -2,31 +2,28 @@ import Link from "next/link";
 
 export default function CTASection({
   heading = "Have a job in mind?",
-  subtext = "I'm open to internships and full-time roles, and would love to hear about what you're working on.",
-  ctaLabel = "Get In Touch",
+  subtext = "I'm open to internships and full-time roles. Tell me what you're working on.",
+  ctaLabel = "Get in touch",
   secondaryHref,
   secondaryLabel,
 }) {
   return (
-    <section className="py-16 bg-gradient-to-r from-primary via-accent to-secondary text-white">
-      <div className="container mx-auto px-4 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">{heading}</h2>
-        <p className="text-lg max-w-2xl mx-auto mb-8 text-white/90">{subtext}</p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 bg-white text-dark font-semibold px-8 py-4 rounded-lg shadow-lg transition-all hover:scale-105 hover:shadow-xl"
-          >
+    <section className="bg-night text-white">
+      <div className="container-page grid gap-8 py-16 md:grid-cols-[1.3fr_1fr] md:items-center md:py-20">
+        <div>
+          <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-tight tracking-[-0.02em]">
+            {heading}
+          </h2>
+          <p className="mt-4 max-w-[52ch] text-lg leading-relaxed text-zinc-400">{subtext}</p>
+        </div>
+        <div className="flex flex-col gap-3 sm:flex-row md:justify-end">
+          <Link href="/contact" className="btn btn-primary">
             {ctaLabel}
-            <span aria-hidden="true">&rarr;</span>
+            <i className="fas fa-arrow-right text-sm" aria-hidden="true" />
           </Link>
           {secondaryHref && secondaryLabel && (
-            <Link
-              href={secondaryHref}
-              className="inline-flex items-center gap-2 border-2 border-white text-white font-semibold px-8 py-4 rounded-lg transition-all hover:scale-105 hover:bg-white/10"
-            >
+            <Link href={secondaryHref} className="btn btn-ghost-dark">
               {secondaryLabel}
-              <span aria-hidden="true">&rarr;</span>
             </Link>
           )}
         </div>

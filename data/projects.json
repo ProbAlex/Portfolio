@@ -1,9 +1,13 @@
 {
-  "Professional Experience": [
+  "Professional experience": [
     {
+      "id": "tiredash-mobile",
       "box_title": "TireDash Mobile",
       "role": "Sole developer",
-      "description": "Website for a mobile seasonal tire swap service. I designed and built the entire site, and it generated over $1,000 in revenue in its first season.",
+      "highlight": { "value": "$1,000+", "label": "in revenue in its first season" },
+      "description": "Website for a mobile seasonal tire swap service. I designed and built the whole site myself, and it brought in over $1,000 in its first season.",
+      "image": "/projects/tiredash.jpg",
+      "tech": ["React", "TypeScript", "Vite", "Tailwind CSS", "Supabase", "Vercel"],
       "github": false,
       "repo": "",
       "live": true,
@@ -11,9 +15,11 @@
       "releases": false
     },
     {
+      "id": "stfrd",
       "box_title": "STFRD",
       "role": "Junior React Developer @ 8Forge Studios",
-      "description": "Site for a strategic marketing communications agency, built and maintained by 8Forge Studios under contract. As a junior developer there, I made small edits within a full team workflow, like a normal company.",
+      "description": "Website for a strategic marketing communications agency. 8Forge Studios builds and maintains it under contract, and as a junior developer there I made small changes through the company's full development workflow.",
+      "tech": ["React"],
       "github": false,
       "repo": "",
       "live": true,
@@ -23,8 +29,10 @@
   ],
   "Applications": [
     {
+      "id": "yappitron",
       "box_title": "Yappitron",
-      "description": "A self-hosted, end-to-end encrypted messenger with live typing, so the other person sees your message as you write it. Flutter client, Rust core and gateway, MLS and OPAQUE. Early development.",
+      "description": "A self-hosted, end-to-end encrypted messenger with live typing: the other person sees your message while you write it. Flutter client, Rust core and gateway, MLS for encryption and OPAQUE for login. Early development.",
+      "tech": ["Flutter", "Rust"],
       "github": true,
       "repo": "https://github.com/ProbAlex/yappitron",
       "live": false,
@@ -32,8 +40,10 @@
       "releases": false
     },
     {
+      "id": "noisitron",
       "box_title": "Noisitron",
-      "description": "A Linux soundboard that mixes audio clips into a virtual mic for Discord, while you monitor playback through your own headphones.",
+      "description": "A Linux soundboard that plays audio clips through a virtual microphone for Discord, while you hear the playback in your own headphones.",
+      "tech": ["TypeScript", "React", "Electron", "Vite", "Tailwind CSS", "Linux"],
       "github": true,
       "repo": "https://github.com/ProbAlex/Noisitron",
       "live": false,
@@ -43,8 +53,10 @@
   ],
   "Websites": [
     {
+      "id": "portfolio",
       "box_title": "Portfolio",
-      "description": "My personal portfolio website showcasing skills, projects, and career history.",
+      "description": "This site. It covers my skills, projects and career history, with skills and projects linked to each other.",
+      "tech": ["Next.js", "React", "JavaScript", "Tailwind CSS", "Vercel"],
       "github": true,
       "repo": "https://github.com/ProbAlex/Portfolio",
       "live": true,
@@ -52,8 +64,11 @@
       "releases": false
     },
     {
+      "id": "noisitron-website",
       "box_title": "Noisitron Website",
-      "description": "The marketing site for Noisitron, introducing the app and pointing Linux users to the latest release.",
+      "description": "The marketing site for Noisitron. It explains the app and points Linux users to the latest release.",
+      "image": "/projects/noisitron-website.jpg",
+      "tech": ["Next.js", "TypeScript", "Tailwind CSS"],
       "github": true,
       "repo": "https://github.com/ProbAlex/NoisitronWebsite",
       "live": true,

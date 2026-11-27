@@ -11,6 +11,7 @@
   },
   "Junior React Developer @ 8ForgeStudios": {
     "click_url": "https://8forgestudios.com/",
+    "project": "stfrd",
     "month": 4,
     "year": 2025
   },
@@ -21,6 +22,7 @@
   },
   "Full Stack Developer @ TireDashMobile": {
     "click_url": "https://www.tiredashmobile.ca/",
+    "project": "tiredash-mobile",
     "month": 6,
     "year": 2026
   }
