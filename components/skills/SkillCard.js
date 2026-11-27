@@ -1,98 +1,61 @@
-"use client";
+import Link from "next/link";
+import { skillId } from "@/lib/links";
 
-import { useState } from "react";
-
-function ConfidenceGauge({ confidence }) {
-  const [hovering, setHovering] = useState(false);
-
-  const rotation = -90 + ((confidence - 1) / 9) * 180;
-  const needleRotation = hovering ? rotation + 10 : rotation;
-
-  let needleColor;
-  if (confidence < 4) {
-    needleColor = "#ef4444";
-  } else if (confidence < 7) {
-    needleColor = "#f59e0b";
-  } else {
-    needleColor = "#10b981";
-  }
-
+export default function SkillCard({ skill, projects, index = 0 }) {
   return (
-    <div
-      className="confidence-gauge"
-      title={`Confidence: ${confidence.toFixed(1)}/10`}
-      onMouseEnter={() => setHovering(true)}
-      onMouseLeave={() => setHovering(false)}
+    <article
+      id={skillId(skill)}
+      data-highlight
+      className="card card-hover anchor-target reveal flex flex-col p-5"
+      style={{ "--i": index }}
     >
-      <div className="gauge-background" />
-      <div className="gauge-center" />
-      <div
-        className="gauge-needle"
-        style={{
-          transform: `rotate(${needleRotation}deg)`,
-          backgroundColor: needleColor,
-          transition: "transform 0.3s ease",
-        }}
-      />
-    </div>
-  );
-}
-
-export default function SkillCard({ skill }) {
-  const [frameworksOpen, setFrameworksOpen] = useState(false);
-  const position = ((skill.proficiency - 1) / 9) * 100;
-  const hasFrameworks = skill.frameworks && skill.frameworks.length > 0;
-
-  return (
-    <div
-      className="skill-card bg-white p-5 rounded-lg shadow-lg"
-      style={{ borderColor: skill.outline_color, borderWidth: "2px", borderStyle: "solid" }}
-    >
-      <div className="flex items-center mb-4">
-        <div className="logo-circle mr-3">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={skill.box_image} alt={`${skill.box_title} logo`} />
-        </div>
-        <h4 className="text-lg font-bold">{skill.box_title}</h4>
+      <div className="flex items-center gap-3">
+        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-line bg-canvas">
+          {skill.icon ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={skill.icon} alt="" className="h-6 w-6 object-contain" loading="lazy" />
+          ) : (
+            <i className={`${skill.faIcon} text-lg text-accent`} aria-hidden="true" />
+          )}
+        </span>
+        <h3 className="text-lg font-semibold tracking-tight text-ink">{skill.name}</h3>
       </div>
 
-      <div className="mb-6">
-        <p className="text-sm text-gray-600 mb-2">Proficiency</p>
-        <div className="proficiency-bar">
-          <div className="proficiency-indicator" style={{ left: `${position}%` }} />
-        </div>
-        <p className="text-right text-sm mt-1">{skill.proficiency.toFixed(1)}/10</p>
-      </div>
+      {skill.frameworks.length > 0 && (
+        <ul className="mt-4 flex flex-wrap gap-2" aria-label={`${skill.name} frameworks and tools`}>
+          {skill.frameworks.map((framework) => (
+            <li key={framework.name} className="chip">
+              {framework.icon && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={framework.icon} alt="" className="h-3.5 w-3.5 object-contain" loading="lazy" />
+              )}
+              {framework.name}
+            </li>
+          ))}
+        </ul>
+      )}
 
-      {hasFrameworks && (
-        <div className="mt-4">
-          <div
-            className="frameworks-header flex justify-between items-center text-gray-500 text-sm cursor-pointer p-2 rounded"
-            onClick={() => setFrameworksOpen((open) => !open)}
-          >
-            <span>Frameworks</span>
-            <i className={`fas fa-chevron-down toggle-frameworks ${frameworksOpen ? "active" : ""}`} />
-          </div>
-
-          <div className={`frameworks-list mt-2 pl-2 ${frameworksOpen ? "active" : ""}`}>
-            {skill.frameworks.map((framework) => (
-              <div
-                key={framework.title}
-                className="flex items-center justify-between py-2 border-b border-gray-100"
-              >
-                <div className="flex items-center">
-                  <div className="framework-logo mr-2">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={framework.image} alt={`${framework.title} logo`} />
-                  </div>
-                  <span className="text-sm">{framework.title}</span>
-                </div>
-                <ConfidenceGauge confidence={framework.confidence} />
-              </div>
+      {projects.length > 0 && (
+        <div className="mt-5 border-t border-line pt-4">
+          <p className="font-mono text-[0.7rem] uppercase tracking-[0.08em] text-muted">Used in</p>
+          <ul className="mt-1.5">
+            {projects.map((project) => (
+              <li key={project.id}>
+                <Link
+                  href={`/projects#${project.id}`}
+                  className="group -mx-2 flex min-h-[44px] items-center justify-between rounded-lg px-2 text-sm font-medium text-ink transition-colors hover:bg-accent-soft hover:text-accent-strong"
+                >
+                  {project.box_title}
+                  <i
+                    className="fas fa-arrow-right text-xs text-muted transition-transform group-hover:translate-x-0.5 group-hover:text-accent"
+                    aria-hidden="true"
+                  />
+                </Link>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       )}
-    </div>
+    </article>
   );
 }

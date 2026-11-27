@@ -1,35 +1,43 @@
 import homelab from "@/data/homelab.json";
+import TechChips from "./TechChips";
 
 export default function HomelabSection() {
   return (
-    <div className="homelab-panel bg-white p-6 md:p-8 rounded-lg shadow-lg">
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
-        <div>
-          <h4 className="text-xl font-bold">{homelab.title}</h4>
-          <p className="text-gray-600 mt-1">{homelab.tagline}</p>
+    <article
+      id={homelab.id}
+      data-highlight
+      className="card anchor-target reveal grid overflow-hidden md:grid-cols-[1fr_1.5fr]"
+    >
+      <div className="flex flex-col bg-night p-6 text-white md:p-8">
+        <h3 className="text-2xl font-semibold tracking-tight">{homelab.title}</h3>
+        <p className="mt-3 leading-relaxed text-zinc-400">{homelab.tagline}</p>
+        <TechChips tech={homelab.tech} dark className="mt-5" />
+        <div className="mt-8 md:mt-auto md:pt-8">
+          <a
+            href={homelab.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-primary w-full sm:w-auto"
+          >
+            Visit leafyserver.tech
+            <i className="fas fa-arrow-up-right-from-square text-xs" aria-hidden="true" />
+          </a>
         </div>
-        <a
-          href={homelab.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn-live md:flex-shrink-0"
-        >
-          <div className="recording-icon" />
-          <span>Visit leafyserver.tech</span>
-        </a>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="grid gap-px bg-line sm:grid-cols-2">
         {homelab.highlights.map((item) => (
-          <div key={item.title} className="homelab-item">
-            <div className="flex items-center gap-2 mb-1">
-              <i className={`fas ${item.icon} text-blue-500`}></i>
-              <h5 className="font-semibold">{item.title}</h5>
+          <li key={item.title} className="flex gap-4 bg-surface p-5 sm:last:odd:col-span-2 md:p-6">
+            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-accent-soft text-accent">
+              <i className={`fas ${item.icon}`} aria-hidden="true" />
+            </span>
+            <div>
+              <h4 className="font-semibold text-ink">{item.title}</h4>
+              <p className="mt-1 text-sm leading-relaxed text-body">{item.description}</p>
             </div>
-            <p className="text-sm text-gray-600">{item.description}</p>
-          </div>
+          </li>
         ))}
-      </div>
-    </div>
+      </ul>
+    </article>
   );
 }

@@ -1,7 +1,8 @@
 import Link from "next/link";
+import LogoMark from "@/components/Logo";
 
 const NAV_LINKS = [
-  { href: "/home", label: "Home" },
+  { href: "/", label: "Home" },
   { href: "/skills", label: "Skills" },
   { href: "/career", label: "Career" },
   { href: "/projects", label: "Projects" },
@@ -16,77 +17,79 @@ const SOCIALS = [
 
 export default function Footer() {
   return (
-    <footer className="bg-dark text-white">
-      <div className="h-1 bg-gradient-to-r from-primary via-accent to-secondary" />
-
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
-          {/* Brand */}
-          <div>
-            <div className="flex items-center gap-2 text-xl font-bold">
-              <span className="text-2xl">😎</span>
-              <span>Alexander Dial</span>
-            </div>
-            <p className="mt-3 max-w-xs text-sm text-gray-400">
-              Student developer building in Java and JavaScript, open to internship and
-              full-time opportunities.
-            </p>
-            <div className="mt-5 flex space-x-3">
-              {SOCIALS.map((social) => (
+    <footer className="bg-night text-zinc-300">
+      <div className="container-page grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1fr]">
+        <div>
+          <div className="flex items-center gap-2.5 font-semibold tracking-tight text-white">
+            <LogoMark inverted className="h-8 w-8" />
+            <span>Alexander Dial</span>
+          </div>
+          <p className="mt-4 max-w-xs text-sm leading-relaxed text-zinc-400">
+            Student developer at New York Tech, open to internships and full-time roles.
+          </p>
+          <div className="mt-5 flex gap-2">
+            {SOCIALS.map((social) => {
+              const external = social.href.startsWith("http");
+              return (
                 <a
                   key={social.label}
                   href={social.href}
-                  target={social.href.startsWith("http") ? "_blank" : undefined}
-                  rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  target={external ? "_blank" : undefined}
+                  rel={external ? "noopener noreferrer" : undefined}
                   aria-label={social.label}
-                  className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-primary"
+                  className="grid h-11 w-11 place-items-center rounded-xl border border-white/10 text-zinc-300 transition-colors hover:border-white/30 hover:text-white"
                 >
-                  <i className={social.icon}></i>
+                  <i className={social.icon} aria-hidden="true" />
                 </a>
-              ))}
-            </div>
-          </div>
-
-          {/* Navigate */}
-          <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-400">
-              Navigate
-            </h3>
-            <ul className="mt-4 space-y-2">
-              {NAV_LINKS.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className="text-gray-300 transition-colors hover:text-primary">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Get in touch */}
-          <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-400">
-              Get In Touch
-            </h3>
-            <ul className="mt-4 space-y-2 text-gray-300">
-              <li>
-                <a href="mailto:alex.dial@outlook.com" className="transition-colors hover:text-primary">
-                  alex.dial@outlook.com
-                </a>
-              </li>
-              <li>
-                <a href="tel:+13478596566" className="transition-colors hover:text-primary">
-                  +1 (347) 859-6566
-                </a>
-              </li>
-              <li className="text-gray-400">New York, NY, USA</li>
-            </ul>
+              );
+            })}
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-sm text-gray-400 md:flex-row">
-          <p>&copy; {new Date().getFullYear()} Alexander Dial. All rights reserved.</p>
-          <p>Built with Next.js, deployed on Vercel.</p>
+        <div>
+          <h2 className="font-mono text-xs uppercase tracking-[0.08em] text-zinc-500">Navigate</h2>
+          <ul className="mt-4 space-y-1">
+            {NAV_LINKS.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className="inline-flex min-h-[36px] items-center transition-colors hover:text-white"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h2 className="font-mono text-xs uppercase tracking-[0.08em] text-zinc-500">Get in touch</h2>
+          <ul className="mt-4 space-y-1">
+            <li>
+              <a
+                href="mailto:alex.dial@outlook.com"
+                className="inline-flex min-h-[36px] items-center break-all transition-colors hover:text-white"
+              >
+                alex.dial@outlook.com
+              </a>
+            </li>
+            <li>
+              <a
+                href="tel:+13478596566"
+                className="inline-flex min-h-[36px] items-center transition-colors hover:text-white"
+              >
+                +1 (347) 859-6566
+              </a>
+            </li>
+            <li className="inline-flex min-h-[36px] items-center text-zinc-500">New York, NY, USA</li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="border-t border-white/10">
+        <div className="container-page flex flex-col gap-2 py-6 text-sm text-zinc-500 md:flex-row md:justify-between">
+          <p>&copy; {new Date().getFullYear()} Alexander Dial</p>
+          <p>Built with Next.js and deployed on Vercel.</p>
         </div>
       </div>
     </footer>
