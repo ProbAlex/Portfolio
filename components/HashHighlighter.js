@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 const HIGHLIGHT_MS = 2400;
 const ROUTER_SETTLE_MS = 80;
+const LAYOUT_SETTLE_MS = 400;
 
 // Document offset that ignores CSS transforms (the reveal animation shifts the
 // bounding rect by a few pixels while it plays).
@@ -22,16 +23,22 @@ export default function HashHighlighter() {
   useEffect(() => {
     let highlightTimer;
 
-    function highlight({ scroll }) {
+    function targetElement() {
       const id = decodeURIComponent(window.location.hash.slice(1));
-      if (!id) return;
-      const el = document.getElementById(id);
-      if (!el) return;
+      return id ? document.getElementById(id) : null;
+    }
 
-      if (scroll) {
-        const margin = parseFloat(getComputedStyle(el).scrollMarginTop) || 0;
-        window.scrollTo({ top: documentTop(el) - margin, behavior: "instant" });
-      }
+    function scrollToHash() {
+      const el = targetElement();
+      if (!el) return;
+      const margin = parseFloat(getComputedStyle(el).scrollMarginTop) || 0;
+      window.scrollTo({ top: documentTop(el) - margin, behavior: "instant" });
+    }
+
+    function highlight({ scroll }) {
+      const el = targetElement();
+      if (!el) return;
+      if (scroll) scrollToHash();
 
       if (!el.hasAttribute("data-highlight")) return;
       document.querySelectorAll(".is-targeted").forEach((node) => node.classList.remove("is-targeted"));
@@ -41,12 +48,28 @@ export default function HashHighlighter() {
     }
 
     const onHashChange = () => highlight({ scroll: false });
+
+    // A second pass corrects for layout that finishes after the first scroll,
+    // unless the visitor has already started scrolling on their own.
+    let userScrolled = false;
+    const markUserScroll = () => {
+      userScrolled = true;
+    };
+    const userEvents = ["wheel", "touchstart", "keydown"];
+    userEvents.forEach((type) => window.addEventListener(type, markUserScroll, { passive: true }));
+
     const settleTimer = setTimeout(() => highlight({ scroll: true }), ROUTER_SETTLE_MS);
+    const correctTimer = setTimeout(() => {
+      if (!userScrolled) scrollToHash();
+    }, LAYOUT_SETTLE_MS);
+
     window.addEventListener("hashchange", onHashChange);
     return () => {
       clearTimeout(settleTimer);
+      clearTimeout(correctTimer);
       clearTimeout(highlightTimer);
       window.removeEventListener("hashchange", onHashChange);
+      userEvents.forEach((type) => window.removeEventListener(type, markUserScroll));
     };
   }, []);
 

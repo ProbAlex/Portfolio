@@ -1,7 +1,8 @@
 import Link from "next/link";
+import LogoMark from "@/components/Logo";
 
 const NAV_LINKS = [
-  { href: "/home", label: "Home" },
+  { href: "/", label: "Home" },
   { href: "/skills", label: "Skills" },
   { href: "/career", label: "Career" },
   { href: "/projects", label: "Projects" },
@@ -20,9 +21,7 @@ export default function Footer() {
       <div className="container-page grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
           <div className="flex items-center gap-2.5 font-semibold tracking-tight text-white">
-            <span className="grid h-8 w-8 place-items-center rounded-lg bg-white font-mono text-[0.7rem] font-bold text-ink">
-              AD
-            </span>
+            <LogoMark inverted className="h-8 w-8" />
             <span>Alexander Dial</span>
           </div>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-zinc-400">

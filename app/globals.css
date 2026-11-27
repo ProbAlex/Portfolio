@@ -277,9 +277,113 @@ body {
   }
 }
 
+/* ---------- Home intro (plays on a fresh load of /) ----------
+   0.00s  logo pops in, brackets first
+   0.25s  name rises letter by letter
+   0.55s  accent line draws
+   1.15s  curtain lifts, page reveals cascade in behind it */
+
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background-color: var(--color-night);
+  pointer-events: none;
+  animation: intro-lift 0.65s cubic-bezier(0.76, 0, 0.24, 1) 1.15s forwards;
+}
+
+.intro-mark {
+  animation: intro-mark 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.intro-mark .logo-leaf {
+  transform-origin: 50% 50%;
+  animation: intro-leaf 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+}
+
+.intro-name {
+  display: flex;
+  overflow: hidden;
+  padding-bottom: 0.1em;
+}
+
+.intro-char {
+  display: inline-block;
+  animation: intro-char 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(0.25s + var(--c) * 0.025s);
+}
+
+.intro-line {
+  display: block;
+  width: 4rem;
+  height: 3px;
+  border-radius: 9999px;
+  background-color: var(--color-accent-bright);
+  transform-origin: left center;
+  animation: intro-line 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both;
+}
+
+/* Hold the page's own reveal until the curtain is lifting */
+:root:has(.intro-overlay) .reveal {
+  animation-delay: calc(1.3s + var(--i, 0) * 70ms);
+}
+
+@keyframes intro-mark {
+  from {
+    opacity: 0;
+    transform: scale(0.6) rotate(-8deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes intro-leaf {
+  from {
+    opacity: 0;
+    transform: scale(0.2) rotate(-30deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes intro-char {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes intro-line {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes intro-lift {
+  to {
+    transform: translateY(-100%);
+    visibility: hidden;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .intro-overlay {
+    display: none;
   }
 
   .reveal,

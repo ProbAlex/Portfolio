@@ -42,6 +42,16 @@
   ],
   "Backend": [
     {
+      "name": "Node.js",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+      "frameworks": []
+    },
+    {
+      "name": "Rust",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rust/rust-original.svg",
+      "frameworks": []
+    },
+    {
       "name": "Python",
       "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
       "frameworks": [
@@ -61,20 +71,65 @@
       "frameworks": []
     },
     {
-      "name": "Node.js",
-      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+      "name": "PostgreSQL",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
       "frameworks": []
     }
   ],
-  "Tools": [
+  "Desktop & mobile": [
+    {
+      "name": "Electron",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/electron/electron-original.svg",
+      "frameworks": []
+    },
+    {
+      "name": "Dart",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg",
+      "frameworks": [
+        {
+          "name": "Flutter",
+          "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg"
+        }
+      ]
+    }
+  ],
+  "DevOps & testing": [
     {
       "name": "Git",
       "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
       "frameworks": []
     },
     {
-      "name": "Google Cloud",
-      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg",
+      "name": "GitHub Actions",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/githubactions/githubactions-original.svg",
+      "frameworks": []
+    },
+    {
+      "name": "Docker",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
+      "frameworks": [
+        { "name": "Docker Compose" }
+      ]
+    },
+    {
+      "name": "Linux packaging",
+      "faIcon": "fa-solid fa-box-open",
+      "frameworks": [
+        { "name": "AppImage" },
+        { "name": "Launchpad PPA" },
+        { "name": "Fedora COPR" }
+      ]
+    },
+    {
+      "name": "Playwright",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/playwright/playwright-original.svg",
+      "frameworks": []
+    }
+  ],
+  "Cloud & services": [
+    {
+      "name": "Vercel",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg",
       "frameworks": []
     },
     {
@@ -83,27 +138,32 @@
       "frameworks": []
     },
     {
-      "name": "Vercel",
-      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg",
+      "name": "Supabase",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg",
+      "frameworks": [
+        {
+          "name": "Edge Functions",
+          "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/denojs/denojs-original.svg"
+        }
+      ]
+    },
+    {
+      "name": "Square API",
+      "faIcon": "fa-solid fa-credit-card",
       "frameworks": []
     },
     {
-      "name": "Supabase",
-      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg",
+      "name": "Mapbox",
+      "faIcon": "fa-solid fa-map-location-dot",
+      "frameworks": []
+    },
+    {
+      "name": "Google Cloud",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg",
       "frameworks": []
     }
   ],
   "Systems": [
-    {
-      "name": "Windows",
-      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg",
-      "frameworks": []
-    },
-    {
-      "name": "macOS",
-      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg",
-      "frameworks": []
-    },
     {
       "name": "Linux",
       "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg",
@@ -121,6 +181,16 @@
           "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fedora/fedora-original.svg"
         }
       ]
+    },
+    {
+      "name": "Windows",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg",
+      "frameworks": []
+    },
+    {
+      "name": "macOS",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg",
+      "frameworks": []
     }
   ]
 }

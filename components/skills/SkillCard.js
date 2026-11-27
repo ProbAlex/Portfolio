@@ -11,8 +11,12 @@ export default function SkillCard({ skill, projects, index = 0 }) {
     >
       <div className="flex items-center gap-3">
         <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-line bg-canvas">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={skill.icon} alt="" className="h-6 w-6 object-contain" loading="lazy" />
+          {skill.icon ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={skill.icon} alt="" className="h-6 w-6 object-contain" loading="lazy" />
+          ) : (
+            <i className={`${skill.faIcon} text-lg text-accent`} aria-hidden="true" />
+          )}
         </span>
         <h3 className="text-lg font-semibold tracking-tight text-ink">{skill.name}</h3>
       </div>
@@ -21,8 +25,10 @@ export default function SkillCard({ skill, projects, index = 0 }) {
         <ul className="mt-4 flex flex-wrap gap-2" aria-label={`${skill.name} frameworks and tools`}>
           {skill.frameworks.map((framework) => (
             <li key={framework.name} className="chip">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={framework.icon} alt="" className="h-3.5 w-3.5 object-contain" loading="lazy" />
+              {framework.icon && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={framework.icon} alt="" className="h-3.5 w-3.5 object-contain" loading="lazy" />
+              )}
               {framework.name}
             </li>
           ))}

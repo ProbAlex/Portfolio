@@ -3,9 +3,10 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import LogoMark from "@/components/Logo";
 
 const LINKS = [
-  { href: "/home", label: "Home" },
+  { href: "/", label: "Home" },
   { href: "/skills", label: "Skills" },
   { href: "/career", label: "Career" },
   { href: "/projects", label: "Projects" },
@@ -28,12 +29,10 @@ export default function Nav() {
     <header className="sticky top-0 z-50 border-b border-line/80 bg-canvas/85 backdrop-blur-md">
       <nav className="container-page flex h-16 items-center justify-between" aria-label="Main">
         <Link
-          href="/home"
+          href="/"
           className="flex min-h-[44px] items-center gap-2.5 font-semibold tracking-tight text-ink"
         >
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-ink font-mono text-[0.7rem] font-bold text-white">
-            AD
-          </span>
+          <LogoMark className="h-8 w-8" />
           <span>Alexander Dial</span>
         </Link>
 

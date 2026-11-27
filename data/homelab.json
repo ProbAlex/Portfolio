@@ -3,7 +3,7 @@
   "title": "leafyserver",
   "tagline": "A personal homelab that started as a box for Jellyfin and grew into a full self-hosted stack.",
   "link": "https://leafyserver.tech",
-  "tech": ["Linux"],
+  "tech": ["Linux", "Docker", "Cloudflare"],
   "highlights": [
     {
       "icon": "fa-film",
@@ -28,7 +28,7 @@
     {
       "icon": "fa-network-wired",
       "title": "Infrastructure",
-      "description": "Monitoring, networking and the VPN the rest of the setup depends on."
+      "description": "Services run in Docker, with Cloudflare, monitoring, networking and the VPN tying the setup together."
     }
   ]
 }

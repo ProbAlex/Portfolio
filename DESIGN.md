@@ -9,7 +9,7 @@ page should read as competent and organized first, with a small amount of person
 - **Density:** 4, "Daily App Balanced". Generous whitespace around headings, compact
   cards so a recruiter can scan every project without hunting.
 - **Variance:** 5, "Offset Asymmetric". Split heroes and label-plus-content section rows.
-  No centered hero on content pages. The `/` entry gate is the one centered layout.
+  No centered hero on content pages. The home intro overlay is the one centered composition.
 - **Motion:** 4, "Fluid CSS". Short staggered fade-up reveals on load, one perpetual
   pulse on the "open to roles" status dot, and tactile press feedback on buttons.
 
@@ -24,7 +24,7 @@ content sections on the canvas, a dark call-to-action band, then the footer.
 - **Body** (#3F3F46): paragraph text
 - **Muted** (#71717A): metadata, captions, counts
 - **Line** (#E4E4E7): 1px borders and dividers
-- **Night** (#111113): CTA band, footer, entry gate, homelab panel
+- **Night** (#111113): CTA band, footer, home intro, homelab panel, logo tile
 - **Fern** (#1F7A54): the single accent. Primary buttons, links, focus rings, active
   states, the targeted-card outline. HSL saturation about 59%.
 - **Fern Strong** (#17603F): accent hover and pressed state
@@ -82,10 +82,22 @@ buttons, headings or bands.
 - **Perpetual:** the status dot in the hero pulses on a 2.4s loop.
 - **Animation rules:** animate only `transform` and `opacity`, and turn everything off
   under `prefers-reduced-motion`.
-- **Entry gate:** the canvas warp animation on `/` stays. It is the one cinematic
-  moment, and it lasts 1.3s.
+- **Home intro:** a fresh load of `/` plays a 1.8s intro with no click needed.
+  - The logo pops in and the leaf springs into the brackets.
+  - The name rises letter by letter, an accent line draws, then the dark curtain lifts.
+  - The hero reveals start as the curtain moves, so the page is already arriving.
+  - Client-side navigation back to Home skips it. Reduced-motion users never see it.
+  - It is pure CSS, so it runs before hydration.
 
-## 7. Cross-linking
+## 7. Logo
+
+The mark is a leaf inside code brackets: developer work plus the "leafy" handle
+used across leafyalex and leafyserver. It sits on a Night tile with white
+brackets and a Fern Bright leaf. On dark backgrounds it inverts to a white tile,
+Night brackets and a Fern leaf. The source lives in `components/Logo.js` and
+`app/icon.svg` (the favicon). It stays legible down to 16px.
+
+## 8. Cross-linking
 
 Skills and projects link both ways:
 
@@ -96,9 +108,9 @@ Skills and projects link both ways:
   - Each framework lives under exactly one skill card, so every link has one target.
 - **Career:** entries with a matching project link to it.
 
-## 8. Anti-Patterns (Banned)
+## 9. Anti-Patterns (Banned)
 
-- No emojis in the UI (the 😎 logo became an "AD" monogram)
+- No emojis in the UI (the 😎 logo is now the bracket-leaf mark)
 - No Inter, no pure black, no neon or outer glows, no purple-blue gradients
 - No proficiency bars, scores or gauges
 - No invented metrics, testimonials or client logos
@@ -107,7 +119,7 @@ Skills and projects link both ways:
 - No custom cursors or cursor trails
 - No em dashes in UI copy
 
-## 9. Deliberate exceptions
+## 10. Deliberate exceptions
 
 The user's explicit requests take priority over the taste rules:
 

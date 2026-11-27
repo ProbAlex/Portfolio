@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import WallHole from "@/components/WallHole";
 import CTASection from "@/components/CTASection";
+import IntroOverlay from "@/components/IntroOverlay";
 import TechChips from "@/components/projects/TechChips";
 import { ProjectPreview } from "@/components/projects/ProjectCard";
 import { getProject } from "@/lib/links";
@@ -89,6 +90,8 @@ export default function HomePage() {
 
   return (
     <>
+      <IntroOverlay />
+
       {/* Hero */}
       <section className="border-b border-line bg-surface">
         <div className="container-page grid items-center gap-10 py-10 md:grid-cols-[1.35fr_1fr] md:py-20 lg:gap-16">
